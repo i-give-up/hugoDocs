@@ -20,6 +20,47 @@ From Hugo 0.28, the default syntax hightlighter in Hugo is [Chroma](https://gith
 
 If you want to continue to use Pygments (see below), set `pygmentsUseClassic=true` in your site config.
 
+The example below shows a simple code snippet from the Hugo source highlighted with the `highlight` shortcode.
+
+* `linenos=inline` turns on line numbers. Note that the `inline` value only has an efffect in Pygments.
+* `hl_lines` lists a set of line numbers or line number ranges to be highlighted.
+
+With that, this:
+
+```
+{{</* highlight go "linenos=inline,hl_lines=8 15-17" */>}}
+// ... code
+{{</* / highlight */>}}
+```
+
+Gives this:
+
+{{< highlight go "linenos=inline,hl_lines=8 15-17" >}}
+// GetTitleFunc returns a func that can be used to transform a string to
+// title case.
+//
+// The supported styles are
+//
+// - "Go" (strings.Title)
+// - "AP" (see https://www.apstylebook.com/)
+// - "Chicago" (see http://www.chicagomanualofstyle.org/home.html)
+//
+// If an unknown or empty style is provided, AP style is what you get.
+func GetTitleFunc(style string) func(s string) string {
+  switch strings.ToLower(style) {
+  case "go":
+    return strings.Title
+  case "chicago":
+    tc := transform.NewTitleConverter(transform.ChicagoStyle)
+    return tc.Title
+  default:
+    tc := transform.NewTitleConverter(transform.APStyle)
+    return tc.Title
+  }
+}
+{{< / highlight >}}
+
+
 ## Soyntax Hightlighter Configuration
 To make the transition from Pygments to Chroma seamless, they share a common set of configuration options:
 

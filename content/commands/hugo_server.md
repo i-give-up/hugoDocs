@@ -1,5 +1,5 @@
 ---
-date: 2017-09-23T10:21:13+02:00
+date: 2017-09-23T17:13:03+02:00
 title: "hugo server"
 slug: hugo_server
 url: /commands/hugo_server/
@@ -53,6 +53,7 @@ hugo server [flags]
       --i18n-warnings              print missing translations
       --ignoreCache                ignores the cache directory
   -l, --layoutDir string           filesystem path to layout directory
+      --liveReloadPort int         port for live reloading (i.e. 443 in HTTPS proxy situations) (default -1)
       --meminterval string         interval to poll memory usage (requires --memstats), valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h". (default "100ms")
       --memstats string            log memory usage to this file
       --navigateToChanged          navigate to changed content file on live browser reload

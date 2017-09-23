@@ -1,5 +1,5 @@
 ---
-date: 2017-09-23T10:21:13+02:00
+date: 2017-09-23T17:13:03+02:00
 title: "hugo gen doc"
 slug: hugo_gen_doc
 url: /commands/hugo_gen_doc/

@@ -1,24 +1,45 @@
 ---
 title: Syntax Highlighting
-linktitle:
-description: Hugo provides server-side syntax highlighting via Pygments and, like most static site generators, works very well with client-side (JavaScript) syntax highlighting libraries as well.
+description: Hugo comes with reallly fast syntax highlighting via Chroma.
 date: 2017-02-01
 publishdate: 2017-02-01
-lastmod: 2017-02-01
-keywords: [highlighting,pygments,code blocks,syntax]
-categories: [developer tools]
+keywords: [highlighting,pygments,chroma,code blocks,syntax]
+categories: [content management]
 menu:
   docs:
-    parent: "tools"
-    weight: 20
+    parent: "content-management"
+    weight: 300
 weight: 20
 sections_weight: 20
 draft: false
-aliases: [/extras/highlighting/,/extras/highlight/]
+aliases: [/extras/highlighting/,/extras/highlight/,/tools/syntax-highlighting/]
 toc: true
 ---
 
-Hugo can highlight source code in _two different ways_&mdash;either pre-processed server side from your content or to defer the processing to the client side, using a JavaScript library.
+From Hugo 0.28, the default syntax hightlighter in Hugo is [Chroma](https://github.com/alecthomas/chroma); it is built in Go and is really, really fast -- and for the most important parts compatible with Pygments.
+
+If you want to continue to use Pygments (see below), set `pygmentsUseClassic=true` in your site config.
+
+## Soyntax Hightlighter Configuration
+To make the transition from Pygments to Chroma seamless, they share a common set of configuration options:
+
+pygmentsOptions
+:  A comma separated list of options. See below for a full list.
+
+pygmentsCodefences
+: Set to true to enable syntax highlighting in code fences with a language tag in markdown (see below for an example).
+
+pygmentsStyle
+: The style of code highlighting. See https://help.farbox.com/pygments.html for a gallery. Note that this option is not relevant when `pygmentsUseClasses` is set.
+
+pygmentsUseClasses
+: Set to true to use CSS classes to format your highlighted code. 
+
+pygmentsCodefencesGuesssyntax
+: Set to true to try to do syntax highlighting on code fenced blocks in markdown without a language tag.
+
+pygmentsUseClassic
+: Set to true to use Pygments instead of the much faster Chroma.
 
 ## Server-side
 
@@ -46,7 +67,7 @@ Hugo gives you two options that you can set with the variable `pygmentsuseclasse
 
 Highlighting is carried out via the [built-in shortcode](/content-management/shortcodes/) `highlight`. `highlight` takes exactly one required parameter for the programming language to be highlighted and requires a closing shortcode. Note that `highlight` is *not* used for client-side javascript highlighting.
 
-### Example `highlight` Shortcode Input
+### Example `highlight` Shortcode
 
 {{< code file="example-highlight-shortcode-input.md" >}}
 {{</* highlight html */>}}
@@ -60,19 +81,6 @@ Highlighting is carried out via the [built-in shortcode](/content-management/sho
 </section>
 {{</* /highlight */>}}
 {{< /code >}}
-
-### Example `highlight` Shortcode Output
-
-{{< output file="example-highlight-shortcode-output.html" >}}
-<span style="color: #f92672">&lt;section</span> <span style="color: #a6e22e">id=</span><span style="color: #e6db74">&quot;main&quot;</span><span style="color: #f92672">&gt;</span>
-  <span style="color: #f92672">&lt;div&gt;</span>
-    <span style="color: #f92672">&lt;h1</span> <span style="color: #a6e22e">id=</span><span style="color: #e6db74">&quot;title&quot;</span><span style="color: #f92672">&gt;</span>{{ .Title }}<span style="color: #f92672">&lt;/h1&gt;</span>
-    {{ range .Data.Pages }}
-      {{ .Render &quot;summary&quot;}}
-    {{ end }}
-  <span style="color: #f92672">&lt;/div&gt;</span>
-<span style="color: #f92672">&lt;/section&gt;</span>
-{{< /output >}}
 
 ### Options
 
